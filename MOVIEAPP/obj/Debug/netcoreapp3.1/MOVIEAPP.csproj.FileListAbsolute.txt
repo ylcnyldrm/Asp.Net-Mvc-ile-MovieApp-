@@ -38,3 +38,9 @@ C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\obj\Debug\netcoreapp3.1\MOVIEAPP.
 C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\obj\Debug\netcoreapp3.1\MOVIEAPP.genruntimeconfig.cache
 C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\obj\Debug\netcoreapp3.1\MOVIEAPP.csproj.CopyComplete
 C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\obj\Debug\netcoreapp3.1\Razor\Views\Movie\List.cshtml.g.cs
+C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\bin\Debug\netcoreapp3.1\package.json
+C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_footer.cshtml.g.cs
+C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_navbar.cshtml.g.cs
+C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_menu.cshtml.g.cs
+C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\obj\Debug\netcoreapp3.1\Razor\Views\Home\_movies.cshtml.g.cs
+C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\obj\Debug\netcoreapp3.1\Razor\Views\Home\Details.cshtml.g.cs

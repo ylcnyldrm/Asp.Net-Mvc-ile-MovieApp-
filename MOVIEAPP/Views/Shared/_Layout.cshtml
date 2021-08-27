@@ -1,9 +1,20 @@
 ﻿<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
+    <title>Movie App</title>
+    <link href="/modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
 </head>
 <body>
-    @*RenderBody birbirinin aynı olan sayfalardaki farklı kısımları belirmek için kullanılır*@
-    @RenderBody() 
-  </body>
+    @*Shared_navbar.cshtmldeki navbarımızı buraya parça şeklinde ekledik*@
+    <header> @Html.Partial("_navbar")   </header>
+    <main>
+        <div class="container mt-4">
+            @*RenderBody birbirinin aynı olan sayfalardaki farklı kısımları belirmek için kullanılır*@
+            @RenderBody()
+        </div> 
+    </main>
+    <footer>
+        @Html.Partial("_footer");
+    </footer> 
+</body>
 </html>

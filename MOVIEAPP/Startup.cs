@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,6 +30,16 @@ namespace MOVIEAPP
             {
                 app.UseDeveloperExceptionPage();
             }
+
+
+            app.UseStaticFiles(); //varsayýlan olarak wwwroot klasörümüz dýþarýya açýlmýþ olur yol => /css/style.css /img/1.jpeg
+            // node_modules klasörünü dýþarýya açmak için bu kýsmý yazýyoruz 
+            app.UseStaticFiles(new StaticFileOptions {
+            FileProvider= new PhysicalFileProvider(Path.Combine
+            ( Directory.GetCurrentDirectory(),"node_modules")),
+               RequestPath="/modules"   //modules/bootstrap/dist/css/bootstrap.min.css þeklinde bir yol olacak
+            });
+
 
             app.UseRouting();
 

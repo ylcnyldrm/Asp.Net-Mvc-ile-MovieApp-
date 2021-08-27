@@ -1,1 +1,12 @@
-﻿<h1>  HOME INDEX </h1>
+﻿@model IEnumerable<Movie>
+
+<div class="row">
+    <div class="col-md-3">
+        @Html.Partial("_menu")
+    </div>
+    <div class="col-md-9">
+        @Html.Partial("_movies",Model)
+        @*<partial name="_movies" model="Model" şeklindede partial kullanılabiliyor.   *@  
+        
+    </div>
+</div>
