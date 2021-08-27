@@ -1,18 +1,21 @@
-﻿using System;
+﻿using MOVIEAPP.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MOVIEAPP.Models
+namespace MOVIEAPP.Data
 {
-    public class Repository
+    public class MovieRepository
     {
         private static List<Movie> _movies = null;
-         static Repository()
+         static MovieRepository()
         {
             _movies = new List<Movie>()
             {
-                new Movie() { id = 1,
+                new Movie() { 
+                    CategoryId=1,
+                    id = 1,
                     Description="<p> " +
                     "In Philadelphia, Billy Batson is an abandoned child who is proving a nuisance to Child Services "+
                     "and the authorities with his stubborn search for his lost mother. "+
@@ -31,6 +34,7 @@ namespace MOVIEAPP.Models
                 },
                 new Movie()
                 {
+                    CategoryId=2,
                     id = 2,
                       Description="<p> " +
                     "In Philadelphia, Billy Batson is an abandoned child who is proving a nuisance to Child Services "+
@@ -50,6 +54,7 @@ namespace MOVIEAPP.Models
                 },
                 new Movie()
                 {
+                    CategoryId=2,
                     id = 3,
                     Name = "High Life",
                       Description="<p> " +
@@ -67,7 +72,9 @@ namespace MOVIEAPP.Models
                     ShortDescription = "Filmin Konusu",
                     ImageUrl = "high_life.jpg"
                 },
-                new Movie() { id = 4,
+                new Movie() {
+                    CategoryId=3,
+                    id = 4,
                     Name = "Billboard",
                       Description="<p> " +
                     "In Philadelphia, Billy Batson is an abandoned child who is proving a nuisance to Child Services "+
@@ -86,6 +93,7 @@ namespace MOVIEAPP.Models
                 },
                 new Movie()
                 {
+                    CategoryId=1,
                     id = 5,
                     Name = "Storm Boy",
                       Description="<p> " +

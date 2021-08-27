@@ -19,8 +19,15 @@ using MOVIEAPP.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 2 "C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\Views\_ViewImports.cshtml"
+using MOVIEAPP.Data;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f1b8d592c501a3d6d2051dbff62d3105d882442a", @"/Views/Movie/Details.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"8fff688c638e347d72f76f726d031c1a69ee67bd", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7a68f52291901494e0bfe6b47c46001a76b5a5fc", @"/Views/_ViewImports.cshtml")]
     public class Views_Movie_Details : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

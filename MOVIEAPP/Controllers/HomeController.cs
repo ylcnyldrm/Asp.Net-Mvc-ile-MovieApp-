@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MOVIEAPP.Data;
 using MOVIEAPP.Models;
 using System;
 using System.Collections.Generic;
@@ -14,13 +15,24 @@ namespace MOVIEAPP.Controllers
             return View();
         }
 
-        public IActionResult Index() {
-            List<Movie> movies = Repository.getMovies; 
+        public IActionResult Index(int? id) {
+
+            var movies = MovieRepository.getMovies;
+            if (id!=null) {
+                movies = movies.Where(i => i.CategoryId == id).ToList();
+            }
+            //MovieCategoryModel model = new MovieCategoryModel();
+            //model.Categories = CategoryRepository.GetCategories;
+            //model.Movies = MovieRepository.getMovies; 
             return View(movies); 
         }
 
         public IActionResult Details(int id) {
-            return View(Repository.GetById(id));
+            //MovieCategoryModel model = new MovieCategoryModel();
+            //model.Categories = CategoryRepository.GetCategories;
+            //model.Movie = MovieRepository.GetById(id);
+            return View(MovieRepository.GetById(id));
+
         }
 
     }

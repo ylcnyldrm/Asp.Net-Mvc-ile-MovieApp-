@@ -1,7 +1,9 @@
 ﻿@model Movie
 <div class="row">
     <div class="col-md-3">
-        @Html.Partial("_menu")
+        @*@Html.Partial("_menu",Model.Categories)*@ 
+        @*@Html.Partial("_menu", Model)*@
+       @await Component.InvokeAsync("CategoryMenu")
     </div> 
     <div class="col-md-9"> 
         <div class="card mb-3"> 

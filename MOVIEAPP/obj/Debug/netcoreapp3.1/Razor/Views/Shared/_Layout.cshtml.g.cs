@@ -19,8 +19,15 @@ using MOVIEAPP.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 2 "C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\Views\_ViewImports.cshtml"
+using MOVIEAPP.Data;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9b851c3357cc6a72a2491b0a505195bbad2a1173", @"/Views/Shared/_Layout.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"8fff688c638e347d72f76f726d031c1a69ee67bd", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7a68f52291901494e0bfe6b47c46001a76b5a5fc", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__Layout : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #line hidden
@@ -49,7 +56,7 @@ using MOVIEAPP.Models;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             WriteLiteral("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9b851c3357cc6a72a2491b0a505195bbad2a11733079", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9b851c3357cc6a72a2491b0a505195bbad2a11733254", async() => {
                 WriteLiteral("\r\n    <title>Movie App</title>\r\n    <link href=\"/modules/bootstrap/dist/css/bootstrap.min.css\" rel=\"stylesheet\" />\r\n    <link href=\"/css/style.css\" rel=\"stylesheet\" />\r\n");
             }
             );
@@ -63,7 +70,7 @@ using MOVIEAPP.Models;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9b851c3357cc6a72a2491b0a505195bbad2a11734226", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9b851c3357cc6a72a2491b0a505195bbad2a11734401", async() => {
                 WriteLiteral("\r\n");
                 WriteLiteral("    <header> ");
 #nullable restore
