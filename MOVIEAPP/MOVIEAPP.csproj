@@ -25,10 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\js\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="node_modules\bootstrap\dist\css\bootstrap-grid.css.map" />
     <None Include="node_modules\bootstrap\dist\css\bootstrap-grid.min.css.map" />
     <None Include="node_modules\bootstrap\dist\css\bootstrap-grid.rtl.css.map" />
@@ -201,6 +197,11 @@
     <None Include="node_modules\bootstrap\scss\_type.scss" />
     <None Include="node_modules\bootstrap\scss\_utilities.scss" />
     <None Include="node_modules\bootstrap\scss\_variables.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.0.26" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 
 </Project>

@@ -17,6 +17,10 @@ namespace MOVIEAPP.Controllers
 
         public IActionResult Index(int? id) {
 
+            VeritabaniIslemleri veritabaniIslemleri = new VeritabaniIslemleri();
+
+           // veritabaniIslemleri.sorguCalistir("insert into kategoriler (kategori_ad) values ('"+"deneme"+"')");
+             
             var movies = MovieRepository.getMovies;
             if (id!=null) {
                 movies = movies.Where(i => i.CategoryId == id).ToList();
@@ -31,8 +35,7 @@ namespace MOVIEAPP.Controllers
             //MovieCategoryModel model = new MovieCategoryModel();
             //model.Categories = CategoryRepository.GetCategories;
             //model.Movie = MovieRepository.GetById(id);
-            return View(MovieRepository.GetById(id));
-
+            return View(MovieRepository.GetById(id)); 
         }
 
     }

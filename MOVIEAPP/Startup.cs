@@ -60,6 +60,12 @@ namespace MOVIEAPP
                     new { controller = "Movie", action = "Index" } 
                     );
 
+                endpoints.MapControllerRoute(
+                   name: "register",
+                   pattern: "register/released/{id?}",
+                   new { controller = "Register", action = "Index" }
+                   );
+
             });
 
         }

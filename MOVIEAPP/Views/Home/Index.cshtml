@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Movie> 
 
 <div class="row">
-    <div class="col-md-3"> 
+    <div class="col-md-3">
         @*@Html.Partial("_menu",Model.Categories)*@
-        @await Component.InvokeAsync("CategoryMenu") 
+        @await Component.InvokeAsync("CategoryMenu")
     </div>
     <div class="col-md-9">
-        @Html.Partial("_movies",Model)
-        @*<partial name="_movies" model="Model" şeklindede partial kullanılabiliyor.   *@  
-        
+        @Html.Partial("_movies", Model)
+        @*<partial name="_movies" model="Model" şeklindede partial kullanılabiliyor.   *@
+
     </div>
-</div>
+ 
