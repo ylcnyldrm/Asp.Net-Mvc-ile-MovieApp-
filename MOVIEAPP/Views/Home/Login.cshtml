@@ -1,0 +1,47 @@
+﻿@model User
+
+@{ Layout = null; }
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Register</title>
+    <link href="/modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/register.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="navbar navbar-expand-sm bg-primary navbar-dark ">
+        <div class="container">
+            <a href="/" class="navbar-brand">Movie App</a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a asp-action="Login" asp-controller="Home" class="nav-link">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="Register" asp-controller="Home" class="nav-link">Register</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <form asp-action="Register" asp-controller="User">
+        <div class="container">
+            <h1>Login</h1> 
+            <hr> 
+
+            <input type="text" placeholder="Enter Email" asp-for="Email" required>
+
+            <input type="password" placeholder="Enter Password" asp-for="Password" required>
+              
+            <hr>
+
+            <button type="submit" class="registerbtn">Register</button>
+        </div>
+
+        <div class="container signin">
+            <p>Already have an account? <a asp-action="Login" asp-controller="Register">Sign in</a>.</p>
+        </div>
+    </form>
+
+
+</body>
+</html>
