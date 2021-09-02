@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Threading.Tasks; 
+using System.ComponentModel.DataAnnotations; 
 
 namespace MOVIEAPP.Models
 {
@@ -13,6 +14,7 @@ namespace MOVIEAPP.Models
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
 
+         
 
     }
 }

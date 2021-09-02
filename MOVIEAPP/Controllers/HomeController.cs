@@ -1,15 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MOVIEAPP.Data;
-using MOVIEAPP.Models;
+using MOVIEAPP.Models; 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Http;
 namespace MOVIEAPP.Controllers
 {
     public class HomeController:Controller
     {
+        VeritabaniIslemleri v = new VeritabaniIslemleri();
         public IActionResult Contact() {
              
             return View();
@@ -37,34 +38,60 @@ namespace MOVIEAPP.Controllers
             //model.Movie = MovieRepository.GetById(id);
             return View(MovieRepository.GetById(id)); 
         }
-
-        public IActionResult Register(string Name, string Surname, string Email, string Password, string ConfirmPassword)
+           
+        public IActionResult Register (User user)
         {
-            Console.WriteLine("TIKLANILDI");
-            User user = new User();
-            user.Name = Name;
-            user.Surname = Surname;
-            user.Email = Email;
-            user.Password = Password;
-            user.ConfirmPassword = ConfirmPassword;
-            if (user.Name != null)
+            
+            bool kullaniciKayit;
+            bool loginKayit;
+              
+            if (user.Name != null &&  user.Password == user.ConfirmPassword )
             {
-                if (user.Password != user.ConfirmPassword)
+                 try
                 {
-                    return View(user);
+                    kullaniciKayit = VeritabaniIslemleri.sorguCalistir("insert into kullanici" +
+                       " (kullanici_ad,kullanici_soyad,kullanici_email,kullanici_sifre)" +
+                       " values('" + user.Name + "','" + user.Surname + "','" + user.Email + "','" + user.Password + "')");
+                    if (kullaniciKayit)
+                    { 
+                      
+                      int kullaniciId= v.kullaniciIdGetir("select kullanici_id from filmler.kullanici where kullanici_email='"+user.Email+"'");
+                        //kullanıcı id çekilip eklenecek
+                        loginKayit = VeritabaniIslemleri.sorguCalistir("insert into login" +
+                      " (email,yetki,kullanici_id)" +
+                      " values('" + user.Email + "','" + 1 + "','"+ kullaniciId + "')");
+
+                        if (loginKayit)
+                        { 
+                            HttpContext.Session.SetString("nameAndSurname", user.Name + " " + user.Surname); 
+                            //    TempData["nameAndSurname"] = user.Name+" "+user.Surname;
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else { 
+                            return View(user);
+                        }
+                    }
+                    else
+                    {
+                        return View(user);
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    return RedirectToAction("Register", "Home");
+                    Console.WriteLine("CATCH");
+                    throw;
                 }
+                    
             }
             else
             {
                 return View();
             }
         }
-        public IActionResult Login()
+        public IActionResult Login(User user)
         {
+            VeritabaniIslemleri veritabani = new VeritabaniIslemleri();
+          
             return View();
         }
 

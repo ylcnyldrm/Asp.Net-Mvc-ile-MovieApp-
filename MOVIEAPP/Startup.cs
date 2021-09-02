@@ -19,6 +19,7 @@ namespace MOVIEAPP
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2);
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -31,7 +32,7 @@ namespace MOVIEAPP
                 app.UseDeveloperExceptionPage();
             }
 
-
+            app.UseSession();
             app.UseStaticFiles(); //varsayýlan olarak wwwroot klasörümüz dýþarýya açýlmýþ olur yol => /css/style.css /img/1.jpeg
             // node_modules klasörünü dýþarýya açmak için bu kýsmý yazýyoruz 
             app.UseStaticFiles(new StaticFileOptions {
@@ -40,6 +41,7 @@ namespace MOVIEAPP
                RequestPath="/modules"   //modules/bootstrap/dist/css/bootstrap.min.css þeklinde bir yol olacak
             });
 
+            
 
             app.UseRouting();
 
