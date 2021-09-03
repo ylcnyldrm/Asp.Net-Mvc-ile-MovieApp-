@@ -12,9 +12,8 @@ namespace MOVIEAPP.Data
         static string baglantiAdresi = "Server=localhost;Uid=root;Pwd=123456;Database=filmler;";
         static MySqlConnection baglanti;
         static MySqlCommand komut;
-        MySqlDataReader dr;
-
-
+        static MySqlDataReader dr;
+         
         public  static bool sorguCalistir(string sorgu) {
             try
             {
@@ -43,25 +42,52 @@ namespace MOVIEAPP.Data
             {
                 kullaniciId= dr.GetInt16("kullanici_id");
             }
+            baglanti.Close();
             return kullaniciId;
         }
 
-        public bool kullaniciGiris(string email,string password ) {
-            string sorgu = "SELECT yetki"+
-            "FROM filmler.kullanici"+
-            "INNER JOIN filmler.login"+
-            "ON filmler.kullanici.kullanici_id = filmler.login.kullanici_id"+
-            "where kullanici_email = '"+email+"' ";
+        public User kullaniciGiris(string email,string password ) {
+            User user = new User();
+            string sorgu = "SELECT kullanici_ad,kullanici_soyad,kullanici_sifre,yetki" +
+                    " FROM filmler.kullanici"+
+                    " INNER JOIN filmler.login"+
+                    " ON filmler.kullanici.kullanici_id = filmler.login.kullanici_id"+
+                    " where kullanici_email = '"+email+"' and kullanici_sifre = '"+password+"' "; 
+            baglanti = new MySqlConnection(baglantiAdresi);
+            baglanti.Open();
+            komut = new MySqlCommand(sorgu, baglanti);
+            dr = komut.ExecuteReader();
+            //Sorgudan dönen veri varsa
+            if (dr.HasRows) {
+
+                while (dr.Read())
+                {
+                    user.Name = dr.GetString("kullanici_ad");
+                    user.Surname = dr.GetString("kullanici_soyad");
+                    user.Yetki = dr.GetInt16("yetki");
+                }
+                return user;
+
+            } else {
+                baglanti.Close();
+                return null;
+            }
+          
+        }
+
+        public static List<Category> kategorileriGetir() {
+            List<Category> categories = new List<Category>(); 
+            string sorgu = "SELECT kategori_ad FROM filmler.kategoriler";
             baglanti = new MySqlConnection(baglantiAdresi);
             baglanti.Open();
             komut = new MySqlCommand(sorgu, baglanti);
             dr = komut.ExecuteReader();
             while (dr.Read())
             {
-                return true;
-            } 
-            return false;
-        }  
+                categories.Add(new Category(dr.GetString("kategori_ad"))); 
+            }
+            return categories; 
+        }
     }
     
 }

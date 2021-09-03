@@ -40,11 +40,11 @@ namespace MOVIEAPP.Controllers
         }
            
         public IActionResult Register (User user)
-        {
-            
+        { 
             bool kullaniciKayit;
             bool loginKayit;
-              
+            user.Yetki = 1;
+
             if (user.Name != null &&  user.Password == user.ConfirmPassword )
             {
                  try
@@ -59,12 +59,12 @@ namespace MOVIEAPP.Controllers
                         //kullanıcı id çekilip eklenecek
                         loginKayit = VeritabaniIslemleri.sorguCalistir("insert into login" +
                       " (email,yetki,kullanici_id)" +
-                      " values('" + user.Email + "','" + 1 + "','"+ kullaniciId + "')");
+                      " values('" + user.Email + "','" + user.Yetki + "','"+ kullaniciId + "')");
 
                         if (loginKayit)
                         { 
                             HttpContext.Session.SetString("nameAndSurname", user.Name + " " + user.Surname); 
-                            //    TempData["nameAndSurname"] = user.Name+" "+user.Surname;
+                            
                             return RedirectToAction("Index", "Home");
                         }
                         else { 
@@ -88,11 +88,40 @@ namespace MOVIEAPP.Controllers
                 return View();
             }
         }
+
         public IActionResult Login(User user)
         {
-            VeritabaniIslemleri veritabani = new VeritabaniIslemleri();
+            if (user != null)
+            { 
+                VeritabaniIslemleri veritabani = new VeritabaniIslemleri();
+                User userInfo = veritabani.kullaniciGiris(user.Email, user.Password);
+                if (userInfo != null)
+                {
+                    switch (userInfo.Yetki)
+                    {
+                        case 1:
+                            //giriş yapan kullanıcı sessiona eklenecek
+                            HttpContext.Session.Clear(); 
+                            HttpContext.Session.SetString("nameAndSurname",userInfo.Name+" "+ userInfo.Surname);
+                            return RedirectToAction("Index", "Home");
+                        case 2:
+                            HttpContext.Session.Clear();
+                            HttpContext.Session.SetString("nameAndSurnameadmin", userInfo.Name + " " + userInfo.Surname);
+                            return RedirectToAction("Index", "Admin");
+                        default: 
+                            return View();
+                    }
+
+                }
+                else { 
+                    return View();
+                } 
+                
+            }
+            else {
+                return View();
+            }
           
-            return View();
         }
 
     }

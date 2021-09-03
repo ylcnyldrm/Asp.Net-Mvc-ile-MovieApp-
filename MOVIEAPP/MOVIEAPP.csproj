@@ -5,6 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="admin\**" />
+    <Compile Remove="v-dashboard\**" />
+    <Content Remove="admin\**" />
+    <Content Remove="v-dashboard\**" />
+    <EmbeddedResource Remove="admin\**" />
+    <EmbeddedResource Remove="v-dashboard\**" />
+    <None Remove="admin\**" />
+    <None Remove="v-dashboard\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="node_modules\bootstrap\dist\css\bootstrap-grid.css" />
     <Content Include="node_modules\bootstrap\dist\css\bootstrap-grid.min.css" />
     <Content Include="node_modules\bootstrap\dist\css\bootstrap-grid.rtl.css" />
@@ -197,12 +208,43 @@
     <None Include="node_modules\bootstrap\scss\_type.scss" />
     <None Include="node_modules\bootstrap\scss\_utilities.scss" />
     <None Include="node_modules\bootstrap\scss\_variables.scss" />
+    <None Include="Views\Admin\forms.cshtml" />
+    <None Include="Views\Admin\login.cshtml" />
+    <None Include="Views\Admin\modals.cshtml" />
+    <None Include="Views\Admin\register.cshtml" />
+    <None Include="Views\Admin\tables.cshtml" />
+    <None Include="Views\Admin\ui.cshtml" />
+    <None Include="wwwroot\adminpanel\admin\.gitattributes" />
+    <None Include="wwwroot\adminpanel\admin\.gitignore" />
+    <None Include="wwwroot\adminpanel\admin\CODE_OF_CONDUCT.md" />
+    <None Include="wwwroot\adminpanel\admin\CONTRIBUTING.md" />
+    <None Include="wwwroot\adminpanel\admin\index.js" />
+    <None Include="wwwroot\adminpanel\admin\LICENSE" />
+    <None Include="wwwroot\adminpanel\admin\main.js" />
+    <None Include="wwwroot\adminpanel\admin\postcss.config.js" />
+    <None Include="wwwroot\adminpanel\admin\README.md" />
+    <None Include="wwwroot\adminpanel\admin\src\chart.js" />
+    <None Include="wwwroot\adminpanel\admin\src\graph.js" />
+    <None Include="wwwroot\adminpanel\admin\src\jquery-3.3.1.min.js" />
+    <None Include="wwwroot\adminpanel\admin\tailwind.config.js" />
+    <None Include="wwwroot\adminpanel\admin\theme.js" />
+    <None Include="wwwroot\adminpanel\admin\webfonts\fa-brands-400.svg" />
+    <None Include="wwwroot\adminpanel\admin\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\adminpanel\admin\webfonts\fa-regular-400.svg" />
+    <None Include="wwwroot\adminpanel\admin\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\adminpanel\admin\webfonts\fa-solid-900.svg" />
+    <None Include="wwwroot\adminpanel\admin\webfonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\adminpanel\admin\webpack.config.js" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
     <PackageReference Include="MySql.Data" Version="8.0.26" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
 </Project>
