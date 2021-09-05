@@ -7,6 +7,7 @@ namespace MOVIEAPP.Models
 {
     public class Category
     {
+
         public Category() { }
         public Category(int Id, string Name) {
             this.Id = Id;
