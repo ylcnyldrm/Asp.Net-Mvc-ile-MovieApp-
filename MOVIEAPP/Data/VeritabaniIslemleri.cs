@@ -1,7 +1,8 @@
 ﻿using MOVIEAPP.Models;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic; 
+using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,7 +14,7 @@ namespace MOVIEAPP.Data
         static MySqlConnection baglanti;
         static MySqlCommand komut;
         static MySqlDataReader dr;
-         
+        DataTable dt = new DataTable();
         public  static bool sorguCalistir(string sorgu) {
             try
             {
@@ -24,8 +25,9 @@ namespace MOVIEAPP.Data
                 baglanti.Close();
                 return true;
             }
-            catch (Exception)
+            catch (MySqlException e)
             {
+                Console.WriteLine("MYSQLEXCEPTİON"+e.ToString());
                 return false;
                 
             }
@@ -66,6 +68,7 @@ namespace MOVIEAPP.Data
                     user.Surname = dr.GetString("kullanici_soyad");
                     user.Yetki = dr.GetInt16("yetki");
                 }
+                baglanti.Close();
                 return user;
 
             } else {
@@ -80,14 +83,27 @@ namespace MOVIEAPP.Data
             string sorgu = "SELECT kategori_ad FROM filmler.kategoriler";
             baglanti = new MySqlConnection(baglantiAdresi);
             baglanti.Open();
-            komut = new MySqlCommand(sorgu, baglanti);
+            komut = new MySqlCommand(sorgu, baglanti); 
             dr = komut.ExecuteReader();
             while (dr.Read())
             {
                 categories.Add(new Category(dr.GetString("kategori_ad"))); 
             }
+            baglanti.Close();
             return categories; 
         }
+
+        public DataTable veriGetir(string sorgu) {
+            baglanti = new MySqlConnection(baglantiAdresi);
+            baglanti.Open();
+            komut = new MySqlCommand(sorgu, baglanti);  
+            dt.Load(komut.ExecuteReader());
+            baglanti.Close();
+            return dt;
+           
+
+        }
+         
     }
     
 }
