@@ -53,7 +53,7 @@ namespace MOVIEAPP
                     name: "default",
                     // action = controller içindeki her bir metoda veriðimiz isim
                     // id? = Soru iþareti isteðe baðlý olarak kullanýlacaðýný belirtir. 
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{name?}");
 
                 //url yolu course released year ve ay þeklinde olmasý lazým year ve month da ? olsaydý
                 // year ve month alanlarýný doldurmaya gerek kalmayacaktý.

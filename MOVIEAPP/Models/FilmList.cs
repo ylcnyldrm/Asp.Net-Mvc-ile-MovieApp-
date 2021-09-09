@@ -7,6 +7,7 @@ namespace MOVIEAPP.Models
 {
     public class FilmList
     {
+        
         public List<Film> films { get; set; }
         public Film film { get; set; }
     }

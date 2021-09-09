@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using System.Data;
+
 namespace MOVIEAPP.Controllers
 {
     public class HomeController:Controller
@@ -16,20 +18,53 @@ namespace MOVIEAPP.Controllers
             return View();
         }
 
-        public IActionResult Index(int? id) {
- 
-            List<Movie> movies = MovieRepository.getMovies;
-            if (id!=null) {
-                movies = movies.Where(i => i.CategoryId == id).ToList();
+        public IActionResult Index(string name) {
+            VeritabaniIslemleri vt = new VeritabaniIslemleri();
+            CategoryList categoryList = new CategoryList(); 
+            categoryList.categories = VeritabaniIslemleri.kategorileriGetir();
+            Console.WriteLine("KATEGORİ AD "+name);
+            categoryList.filmler = new List<Film>();
+            List<Film> filmler = new List<Film>();
+            Film film;
+            if (name!=null) { 
+                DataTable dt = vt.veriGetir("SELECT * "+
+                "FROM filmler "+
+                "INNER JOIN kategoriler "+
+                "ON filmler.kategori_id = kategoriler.kategori_id where kategori_ad='"+name+"'  "); 
+                
+                foreach (DataRow row in dt.Rows)
+                {
+                    film = new Film();
+                    film.filmAd = row["film_ad"].ToString();
+                    film.yonetmenAd = row["yonetmen_ad"].ToString();
+                    film.kategoriAd = row["kategori_ad"].ToString();
+                    film.yonetmenAd = row["konusu"].ToString();
+                    film.afisUrl = row["film_afisi"].ToString();
+                    film.yapimYili = (int) row["yapim_yili"];
+                    film.filmId = (int)row["film_id"];
+                    filmler.Add(film);
+                }
+                categoryList.filmler= filmler; 
+
+                categoryList.categories = categoryList.categories.Where(i => i.Name == name).ToList();
             } 
-            return View(movies); 
+            return View(categoryList); 
         }
 
-        public IActionResult Details(int id) {
-            //MovieCategoryModel model = new MovieCategoryModel();
-            //model.Categories = CategoryRepository.GetCategories;
-            //model.Movie = MovieRepository.GetById(id);
-            return View(MovieRepository.GetById(id)); 
+        public IActionResult Details() {
+            Film film = new Film();
+            string filmId= RouteData.Values["name"].ToString();
+            VeritabaniIslemleri vt = new VeritabaniIslemleri();
+            DataTable dt = vt.veriGetir("SELECT * FROM filmler.filmler where film_id='"+filmId+"' ");
+            foreach (DataRow row in dt.Rows)
+            {
+                film.filmAd = row["film_ad"].ToString();
+                film.yonetmenAd = row["yonetmen_ad"].ToString();
+                film.konusu = row["konusu"].ToString();
+                film.afisUrl = row["film_afisi"].ToString();
+                film.yapimYili = (int) row["yapim_yili"];
+            }
+            return View(film); 
         }
            
         public IActionResult Register (User user)
