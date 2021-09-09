@@ -72,3 +72,4 @@ C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\bin\Debug\netcoreapp3.1\MOVIEAPP.
 C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\bin\Debug\netcoreapp3.1\MOVIEAPP.pdb
 C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\bin\Debug\netcoreapp3.1\MOVIEAPP.Views.pdb
 C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\obj\Debug\netcoreapp3.1\MOVIEAPP.genruntimeconfig.cache
+C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\obj\Debug\netcoreapp3.1\Razor\Views\Admin\guncelle.cshtml.g.cs

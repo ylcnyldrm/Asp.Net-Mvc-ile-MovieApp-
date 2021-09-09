@@ -1,9 +1,7 @@
-
+﻿
 @model CategoryList
- 
-@{ Layout = null;
-    Console.WriteLine("form cs html ");
-    }
+
+@{ Layout = null; }
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,7 +33,7 @@
                     </div>
                     <ul class="list-reset flex flex-col">
                         <li class=" w-full h-full py-3 px-2 border-b border-light-border ">
-                            <a asp-action="Index" asp-controller="Admin"
+                            <a asp-action="Admin" asp-controller="Guncelle"
                                class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
                                 <i class="fas fa-tachometer-alt float-left mx-2"></i>
                                 Dashboard
@@ -127,7 +125,7 @@
                                     Film Ekle
                                 </div>
                                 <div class="p-3">
-                                    <form asp-controller="Admin" asp-action="Forms" class="w-full">
+                                    <form asp-controller="Admin" asp-action="guncelle"  class="w-full">
                                         <div asp-validation-summary="All" class="flex flex-wrap -mx-3 mb-6"></div>
 
                                         <div class="flex flex-wrap -mx-3 mb-6">
@@ -170,7 +168,7 @@
                                                                 <option> @item.Name </option>
                                                             }
 
-                                                        } 
+                                                        }
 
                                                     </select>
 
@@ -181,6 +179,10 @@
                                                 <input asp-for="@Model.film.yapimYili" class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                                        id="grid-zip" type="text" placeholder="Yapım Yılı">
                                             </div>
+                                            @{
+                                                @Html.HiddenFor(m => m.film.kategoriId)
+                                                @Html.HiddenFor(m=>m.film.filmId)
+                                            }
 
                                         </div>
                                         <div>

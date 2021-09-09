@@ -14,7 +14,7 @@ namespace MOVIEAPP.Models
      
         public string filmAd { get; set; }
         [Required(ErrorMessage = "Film yapım yılı giriniz")]
-        public string yapımYılı { get; set; }
+        public int yapimYili { get; set; }
         [Required(ErrorMessage = "Yönetmen adı giriniz")]
         public string yonetmenAd { get; set; }
         [Required(ErrorMessage = "Filmin konusunu giriniz")]
