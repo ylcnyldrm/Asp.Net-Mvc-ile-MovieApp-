@@ -13,7 +13,6 @@ namespace MOVIEAPP.Controllers
     public class AdminController : Controller
     {
         VeritabaniIslemleri vt = new VeritabaniIslemleri();
-        int filmId = 0;
         public IActionResult Index()
         {
 
@@ -71,8 +70,7 @@ namespace MOVIEAPP.Controllers
 
         [HttpGet]
         public IActionResult Tables()
-        {
-            Console.WriteLine("TABLES boş ");
+        { 
             FilmList filmList = new FilmList();
             filmList.films = new List<Film>();
             DataTable dt = vt.veriGetir("SELECT film_id,film_ad,yonetmen_ad,konusu,yapim_yili,filmler.kategori_id FROM filmler.filmler " +
@@ -126,9 +124,7 @@ namespace MOVIEAPP.Controllers
         public IActionResult Guncelle(int formsFilmId)
         {
             if (formsFilmId != 0)
-            {
-                filmId = 0;
-                filmId = formsFilmId;
+            { 
                 VeritabaniIslemleri vt = new VeritabaniIslemleri();
                 CategoryList categoryList = new CategoryList();
                 categoryList.categories = new List<Category>();
@@ -172,7 +168,24 @@ namespace MOVIEAPP.Controllers
                     "kategori_id='" + kategoriId + "' where filmler.film_id='"+filmId+"' ");
                 if (b)
                 {
-                    return View();
+                    FilmList filmList = new FilmList();
+                    filmList.films = new List<Film>();
+                    DataTable dt = vt.veriGetir("SELECT film_id,film_ad,yonetmen_ad,konusu,yapim_yili,filmler.kategori_id FROM filmler.filmler " +
+                    " INNER JOIN filmler.kategoriler" +
+                    " ON filmler.kategori_id = kategoriler.kategori_id ");
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        filmList.film = new Film();
+                        filmList.film.filmAd = row["film_Ad"].ToString();
+                        filmList.film.konusu = row["konusu"].ToString();
+                        filmList.film.yonetmenAd = row["yonetmen_ad"].ToString();
+                        filmList.film.yapimYili = (int)row["yapim_yili"];
+                        filmList.film.kategoriId = (int)row["kategori_id"];
+                        filmList.film.filmId = (int)row["film_id"];
+                        filmList.films.Add(filmList.film);
+                    }
+                    return View("Tables",filmList); 
                 }
                 return Content("Güncelleme Başarısız");
             }
@@ -182,8 +195,6 @@ namespace MOVIEAPP.Controllers
             return Content("Güncelleme Başarısız");
         }
 
-
-
-
+         
     }
 }

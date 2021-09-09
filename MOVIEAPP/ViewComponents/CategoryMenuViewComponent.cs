@@ -11,7 +11,8 @@ namespace MOVIEAPP.ViewComponents
     {
         public IViewComponentResult Invoke () {
             //nula eşit değilse selectedcategoryye aktar
-            if (RouteData.Values["action"].ToString()=="Register") 
+            //RouteData ile o anki actionu al 
+            if (RouteData.Values["action"].ToString()=="Index") 
                 ViewBag.SelectedCategory = RouteData?.Values["id"];
                 return View(CategoryRepository.GetCategories);
            

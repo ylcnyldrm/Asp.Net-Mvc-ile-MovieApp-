@@ -17,18 +17,11 @@ namespace MOVIEAPP.Controllers
         }
 
         public IActionResult Index(int? id) {
-
-            VeritabaniIslemleri veritabaniIslemleri = new VeritabaniIslemleri();
-
-           // veritabaniIslemleri.sorguCalistir("insert into kategoriler (kategori_ad) values ('"+"deneme"+"')");
-             
-            var movies = MovieRepository.getMovies;
+ 
+            List<Movie> movies = MovieRepository.getMovies;
             if (id!=null) {
                 movies = movies.Where(i => i.CategoryId == id).ToList();
-            }
-            //MovieCategoryModel model = new MovieCategoryModel();
-            //model.Categories = CategoryRepository.GetCategories;
-            //model.Movies = MovieRepository.getMovies; 
+            } 
             return View(movies); 
         }
 
