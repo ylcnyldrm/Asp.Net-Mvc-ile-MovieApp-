@@ -26,12 +26,13 @@ namespace MOVIEAPP.Controllers
             categoryList.filmler = new List<Film>();
             List<Film> filmler = new List<Film>();
             Film film;
-            if (name!=null) { 
-                DataTable dt = vt.veriGetir("SELECT * "+
-                "FROM filmler "+
-                "INNER JOIN kategoriler "+
-                "ON filmler.kategori_id = kategoriler.kategori_id where kategori_ad='"+name+"'  "); 
-                
+            if (name != null)
+            {
+                DataTable dt = vt.veriGetir("SELECT * " +
+                "FROM filmler " +
+                "INNER JOIN kategoriler " +
+                "ON filmler.kategori_id = kategoriler.kategori_id where kategori_ad='" + name + "'  ");
+
                 foreach (DataRow row in dt.Rows)
                 {
                     film = new Film();
@@ -40,17 +41,42 @@ namespace MOVIEAPP.Controllers
                     film.kategoriAd = row["kategori_ad"].ToString();
                     film.yonetmenAd = row["konusu"].ToString();
                     film.afisUrl = row["film_afisi"].ToString();
-                    film.yapimYili = (int) row["yapim_yili"];
+                    film.yapimYili = (int)row["yapim_yili"];
                     film.filmId = (int)row["film_id"];
                     filmler.Add(film);
                 }
-                categoryList.filmler= filmler; 
+                categoryList.filmler = filmler;
 
                 categoryList.categories = categoryList.categories.Where(i => i.Name == name).ToList();
-            } 
+            }
+            else {
+                DataTable dt = vt.veriGetir("SELECT * " +
+               "FROM filmler " +
+               "INNER JOIN kategoriler " +
+               "ON filmler.kategori_id = kategoriler.kategori_id");
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    film = new Film();
+                    film.filmAd = row["film_ad"].ToString();
+                    film.yonetmenAd = row["yonetmen_ad"].ToString();
+                    film.kategoriAd = row["kategori_ad"].ToString();
+                    film.yonetmenAd = row["konusu"].ToString();
+                    film.afisUrl = row["film_afisi"].ToString();
+                    film.yapimYili = (int)row["yapim_yili"];
+                    film.filmId = (int)row["film_id"];
+                    filmler.Add(film);
+                    if (filmler.Count >=10) {
+                        break;
+                    }
+                }
+                categoryList.filmler = filmler;
+
+                categoryList.categories = categoryList.categories.Where(i => i.Name == name).ToList();
+            }
             return View(categoryList); 
         }
-
+      
         public IActionResult Details() {
             Film film = new Film();
             string filmId= RouteData.Values["name"].ToString();
@@ -129,7 +155,7 @@ namespace MOVIEAPP.Controllers
                     {
                         case 1:
                             //giriş yapan kullanıcı sessiona eklenecek
-                            HttpContext.Session.Clear(); 
+                            HttpContext.Session.Clear();  
                             HttpContext.Session.SetString("nameAndSurname",userInfo.Name+" "+ userInfo.Surname);
                             return RedirectToAction("Index", "Home");
                         case 2:
