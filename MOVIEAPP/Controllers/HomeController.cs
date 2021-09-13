@@ -10,19 +10,20 @@ using System.Data;
 
 namespace MOVIEAPP.Controllers
 {
-    public class HomeController:Controller
+    public class HomeController : Controller
     {
         VeritabaniIslemleri v = new VeritabaniIslemleri();
         public IActionResult Contact() {
-             
+
             return View();
         }
-
+        public IActionResult Popup() {
+            return View();
+        }
         public IActionResult Index(string name) {
             VeritabaniIslemleri vt = new VeritabaniIslemleri();
             CategoryList categoryList = new CategoryList(); 
-            categoryList.categories = VeritabaniIslemleri.kategorileriGetir();
-            Console.WriteLine("KATEGORİ AD "+name);
+            categoryList.categories = VeritabaniIslemleri.kategorileriGetir(); 
             categoryList.filmler = new List<Film>();
             List<Film> filmler = new List<Film>();
             Film film;

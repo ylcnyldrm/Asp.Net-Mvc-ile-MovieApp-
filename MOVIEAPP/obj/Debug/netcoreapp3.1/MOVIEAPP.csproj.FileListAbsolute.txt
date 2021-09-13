@@ -21,7 +21,6 @@ C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\bin\Debug\netcoreapp3.1\runtimes\
 C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\obj\Debug\netcoreapp3.1\MOVIEAPP.csproj.AssemblyReference.cache
 C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\obj\Debug\netcoreapp3.1\MOVIEAPP.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\obj\Debug\netcoreapp3.1\MOVIEAPP.AssemblyInfoInputs.cache
 C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\obj\Debug\netcoreapp3.1\MOVIEAPP.AssemblyInfo.cs
@@ -73,3 +72,6 @@ C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\bin\Debug\netcoreapp3.1\MOVIEAPP.
 C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\bin\Debug\netcoreapp3.1\MOVIEAPP.Views.pdb
 C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\obj\Debug\netcoreapp3.1\MOVIEAPP.genruntimeconfig.cache
 C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\obj\Debug\netcoreapp3.1\Razor\Views\Admin\guncelle.cshtml.g.cs
+C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\bin\Debug\netcoreapp3.1\package-lock.json
+C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\obj\Debug\netcoreapp3.1\MOVIEAPP.csproj.AssemblyReference.cache
+C:\Users\Aranel\source\repos\MOVIEAPP\MOVIEAPP\obj\Debug\netcoreapp3.1\Razor\Views\Home\popup.cshtml.g.cs
