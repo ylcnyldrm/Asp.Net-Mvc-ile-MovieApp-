@@ -212,18 +212,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach (var item in Model.films)
+                                            @foreach (var item in Model.movies)
 
                                             {
                                         <tr> 
-                                            <td class="border px-4 py-2">@item.filmAd     </td>
-                                            <td class="border px-4 py-2">@item.konusu     </td>
-                                            <td class="border px-4 py-2">@item.yonetmenAd </td>
-                                            <td class="border px-4 py-2">@item.yapimYili  </td>
+                                            <td class="border px-4 py-2">@item.name     </td>
+                                            <td class="border px-4 py-2">@item.subject     </td>
+                                            <td class="border px-4 py-2">@item.directorName </td>
+                                            <td class="border px-4 py-2">@item.year  </td>
                                             <td class="border px-4 py-2">
                                                 @*tables yazan yer index controllerdaki action metodlarının adı örnek: Tables Metodu*@
-                                                @Html.ActionLink("Sil", "Tables","Admin", new { TablesFilmId = item.filmId, sil = "sil" })
-                                                @Html.ActionLink("Güncelle", "Guncelle", "Admin", new { formsFilmId = item.filmId, guncelle = "guncelle" }) 
+                                                @Html.ActionLink("Sil", "Tables","Admin", new { TablesFilmId = item.movieId, sil = "sil" })
+                                                @Html.ActionLink("Güncelle", "Guncelle", "Admin", new { formsFilmId = item.movieId, guncelle = "guncelle" }) 
                                             </td>
 
                                         </tr>

@@ -66,7 +66,7 @@ namespace MOVIEAPP
                 endpoints.MapControllerRoute(
                    name: "register",
                    pattern: "register/released/{id?}",
-                   new { controller = "User", action = "Login" }
+                   new { controller = "KUllanici", action = "Login" }
                    );
 
             });

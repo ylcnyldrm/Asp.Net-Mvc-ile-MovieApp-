@@ -1,4 +1,4 @@
-﻿@model Film
+﻿@model Movie
 <div class="row">
     <div class="col-md-3">
         @*@Html.Partial("_menu",Model.Categories)*@ 
@@ -10,13 +10,13 @@
             <div class="card-body"> 
                 <div class="row no-gutter">
                     <div class="col-md-4">
-                        <img src="@Model.afisUrl" alt="@Model.konusu" class="card-img" />
+                        <img src="@Model.posterUrl" alt="@Model.subject" class="card-img" />
                     </div>
                     <div class="col-md-8">
                         <h5 class="card-title">
-                            <a asp-action="Details" asp-controller="Home" asp-route-id="@Model.filmId"> @Model.filmAd   </a>
+                            <a asp-action="Details" asp-controller="Home" asp-route-id="@Model.movieId"> @Model.name   </a>
                         </h5>
-                        <p class="card-text"> @Html.Raw(Model.yonetmenAd)</p>
+                        <p class="card-text"> @Html.Raw(Model.directorName)</p>
                         <p class="card-text">
                             <small class="text-muted"> 3 days ago</small>
                         </p>

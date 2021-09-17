@@ -12,7 +12,7 @@ namespace MOVIEAPP.Controllers
 {
     public class HomeController : Controller
     {
-        VeritabaniIslemleri v = new VeritabaniIslemleri();
+        DatabaseTransactions v = new DatabaseTransactions();
         public IActionResult Contact() {
 
             return View();
@@ -21,12 +21,12 @@ namespace MOVIEAPP.Controllers
             return View();
         }
         public IActionResult Index(string name) {
-            VeritabaniIslemleri vt = new VeritabaniIslemleri();
+            DatabaseTransactions vt = new DatabaseTransactions();
             CategoryList categoryList = new CategoryList(); 
-            categoryList.categories = VeritabaniIslemleri.kategorileriGetir(); 
-            categoryList.filmler = new List<Film>();
-            List<Film> filmler = new List<Film>();
-            Film film;
+            categoryList.categories = DatabaseTransactions.kategorileriGetir(); 
+            categoryList.movies = new List<Movie>();
+            List<Movie> filmler = new List<Movie>();
+            Movie film;
             if (name != null)
             {
                 DataTable dt = vt.veriGetir("SELECT * " +
@@ -36,17 +36,17 @@ namespace MOVIEAPP.Controllers
 
                 foreach (DataRow row in dt.Rows)
                 {
-                    film = new Film();
-                    film.filmAd = row["film_ad"].ToString();
-                    film.yonetmenAd = row["yonetmen_ad"].ToString();
-                    film.kategoriAd = row["kategori_ad"].ToString();
-                    film.yonetmenAd = row["konusu"].ToString();
-                    film.afisUrl = row["film_afisi"].ToString();
-                    film.yapimYili = (int)row["yapim_yili"];
-                    film.filmId = (int)row["film_id"];
+                    film = new Movie();
+                    film.name = row["film_ad"].ToString();
+                    film.directorName = row["yonetmen_ad"].ToString();
+                    film.categoryName = row["kategori_ad"].ToString();
+                    film.subject = row["konusu"].ToString();
+                    film.posterUrl = row["film_afisi"].ToString();
+                    film.year = (int)row["yapim_yili"];
+                    film.movieId = (int)row["film_id"];
                     filmler.Add(film);
                 }
-                categoryList.filmler = filmler;
+                categoryList.movies = filmler;
 
                 categoryList.categories = categoryList.categories.Where(i => i.Name == name).ToList();
             }
@@ -58,20 +58,20 @@ namespace MOVIEAPP.Controllers
 
                 foreach (DataRow row in dt.Rows)
                 {
-                    film = new Film();
-                    film.filmAd = row["film_ad"].ToString();
-                    film.yonetmenAd = row["yonetmen_ad"].ToString();
-                    film.kategoriAd = row["kategori_ad"].ToString();
-                    film.yonetmenAd = row["konusu"].ToString();
-                    film.afisUrl = row["film_afisi"].ToString();
-                    film.yapimYili = (int)row["yapim_yili"];
-                    film.filmId = (int)row["film_id"];
+                    film = new Movie();
+                    film.name = row["film_ad"].ToString();
+                    film.directorName = row["yonetmen_ad"].ToString();
+                    film.categoryName = row["kategori_ad"].ToString();
+                    film.subject = row["konusu"].ToString();
+                    film.posterUrl = row["film_afisi"].ToString();
+                    film.year = (int)row["yapim_yili"];
+                    film.movieId = (int)row["film_id"];
                     filmler.Add(film);
                     if (filmler.Count >=10) {
                         break;
                     }
                 }
-                categoryList.filmler = filmler;
+                categoryList.movies = filmler;
 
                 categoryList.categories = categoryList.categories.Where(i => i.Name == name).ToList();
             }
@@ -79,17 +79,17 @@ namespace MOVIEAPP.Controllers
         }
       
         public IActionResult Details() {
-            Film film = new Film();
+            Movie film = new Movie();
             string filmId= RouteData.Values["name"].ToString();
-            VeritabaniIslemleri vt = new VeritabaniIslemleri();
+            DatabaseTransactions vt = new DatabaseTransactions();
             DataTable dt = vt.veriGetir("SELECT * FROM filmler.filmler where film_id='"+filmId+"' ");
             foreach (DataRow row in dt.Rows)
             {
-                film.filmAd = row["film_ad"].ToString();
-                film.yonetmenAd = row["yonetmen_ad"].ToString();
-                film.konusu = row["konusu"].ToString();
-                film.afisUrl = row["film_afisi"].ToString();
-                film.yapimYili = (int) row["yapim_yili"];
+                film.name = row["film_ad"].ToString();
+                film.directorName = row["yonetmen_ad"].ToString();
+                film.subject = row["konusu"].ToString();
+                film.posterUrl = row["film_afisi"].ToString();
+                film.year = (int) row["yapim_yili"];
             }
             return View(film); 
         }
@@ -98,27 +98,27 @@ namespace MOVIEAPP.Controllers
         { 
             bool kullaniciKayit;
             bool loginKayit;
-            user.Yetki = 1;
+            user.authority = 1;
 
-            if (user.Name != null &&  user.Password == user.ConfirmPassword )
+            if (user.name != null &&  user.password == user.confirmPassword )
             {
                  try
                 {
-                    kullaniciKayit = VeritabaniIslemleri.sorguCalistir("insert into kullanici" +
+                    kullaniciKayit = DatabaseTransactions.executeQuery("insert into kullanici" +
                        " (kullanici_ad,kullanici_soyad,kullanici_email,kullanici_sifre)" +
-                       " values('" + user.Name + "','" + user.Surname + "','" + user.Email + "','" + user.Password + "')");
+                       " values('" + user.name + "','" + user.surname + "','" + user.Email + "','" + user.password + "')");
                     if (kullaniciKayit)
                     { 
                       
                       int kullaniciId= v.kullaniciIdGetir("select kullanici_id from filmler.kullanici where kullanici_email='"+user.Email+"'");
                         //kullanıcı id çekilip eklenecek
-                        loginKayit = VeritabaniIslemleri.sorguCalistir("insert into login" +
+                        loginKayit = DatabaseTransactions.executeQuery("insert into login" +
                       " (email,yetki,kullanici_id)" +
-                      " values('" + user.Email + "','" + user.Yetki + "','"+ kullaniciId + "')");
+                      " values('" + user.Email + "','" + user.authority + "','"+ kullaniciId + "')");
 
                         if (loginKayit)
                         { 
-                            HttpContext.Session.SetString("nameAndSurname", user.Name + " " + user.Surname); 
+                            HttpContext.Session.SetString("nameAndSurname", user.name + " " + user.surname); 
                             
                             return RedirectToAction("Index", "Home");
                         }
@@ -148,20 +148,20 @@ namespace MOVIEAPP.Controllers
         {
             if (user != null)
             { 
-                VeritabaniIslemleri veritabani = new VeritabaniIslemleri();
-                User userInfo = veritabani.kullaniciGiris(user.Email, user.Password);
+                DatabaseTransactions veritabani = new DatabaseTransactions();
+                User userInfo = veritabani.kullaniciGiris(user.Email, user.password);
                 if (userInfo != null)
                 {
-                    switch (userInfo.Yetki)
+                    switch (userInfo.authority)
                     {
                         case 1:
                             //giriş yapan kullanıcı sessiona eklenecek
                             HttpContext.Session.Clear();  
-                            HttpContext.Session.SetString("nameAndSurname",userInfo.Name+" "+ userInfo.Surname);
+                            HttpContext.Session.SetString("nameAndSurname",userInfo.name+" "+ userInfo.surname);
                             return RedirectToAction("Index", "Home");
                         case 2:
                             HttpContext.Session.Clear();
-                            HttpContext.Session.SetString("nameAndSurnameadmin", userInfo.Name + " " + userInfo.Surname);
+                            HttpContext.Session.SetString("nameAndSurnameadmin", userInfo.name + " " + userInfo.surname);
                             return RedirectToAction("Index", "Admin");
                         default: 
                             return View();

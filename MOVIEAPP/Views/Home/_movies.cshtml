@@ -1,21 +1,21 @@
 ﻿@model CategoryList
 
    
-@foreach (var film in Model.filmler)
+@foreach (var film in Model.movies)
 {
     <div class="card mb-3">
         <div class="row no-gutter">
             <div class="col-md-3">
-                <img src="@film.afisUrl" alt="@film.konusu" class="card-img" />
+                <img src="@film.posterUrl"  class="card-img" />
             </div>
             <div class="col-md-9">
                 <div class="card-body">
                     <h5 class="card-title">
-                           <a asp-action="Details" asp-controller="Home" asp-route-name="@film.filmId"> @film.filmAd   </a > 
+                           <a asp-action="Details" asp-controller="Home" asp-route-name="@film.movieId"> @film.name   </a > 
                     </h5>
-                    <p class="card-text"> @film.yonetmenAd</p>
+                    <p class="card-text"> @film.directorName</p>
                     <p class="card-text">
-                        <small class="text-muted"> @film.yapimYili</small>
+                        <small class="text-muted"> @film.year</small>
                     </p>
                 </div>
             </div>

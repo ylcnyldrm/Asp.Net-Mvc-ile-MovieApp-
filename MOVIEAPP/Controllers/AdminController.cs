@@ -12,7 +12,7 @@ namespace MOVIEAPP.Controllers
 {
     public class AdminController : Controller
     {
-        VeritabaniIslemleri vt = new VeritabaniIslemleri();
+        DatabaseTransactions vt = new DatabaseTransactions();
         public IActionResult Index()
         {
             if (erisimKontrol()==true)
@@ -25,7 +25,7 @@ namespace MOVIEAPP.Controllers
         [HttpGet]
         public IActionResult Forms()
         {
-            if (erisimKontrol() == true)
+            if (erisimKontrol())
             {
                 DataTable dt = vt.veriGetir("SELECT * FROM filmler.kategoriler");
                 CategoryList categoryList = new CategoryList();
@@ -49,20 +49,20 @@ namespace MOVIEAPP.Controllers
             if (erisimKontrol() == true)
             {
 
-                string kategoriAd = categoryList.film.kategoriAd;
-                string filmAd = categoryList.film.filmAd;
-                string yonetmenAd = categoryList.film.yonetmenAd;
-                string konu = categoryList.film.konusu;
-                string afisUrl = categoryList.film.afisUrl;
-                int yapimYili = categoryList.film.yapimYili;
+                string kategoriAd = categoryList.movie.categoryName;
+                string filmAd = categoryList.movie.name;
+                string yonetmenAd = categoryList.movie.directorName;
+                string konu = categoryList.movie.subject;
+                string afisUrl = categoryList.movie.posterUrl;
+                int yapimYili = categoryList.movie.year;
 
-                categoryList.film = new CategoryList().film;
+                categoryList.movie = new CategoryList().movie;
                 if (this.ModelState.IsValid == true)
                 {
                     DataTable dt = vt.veriGetir("SELECT kategori_id FROM filmler.kategoriler where kategori_ad='" + kategoriAd + "'");
                     int kategoriId = (int)dt.Rows[0]["kategori_id"];
                     Console.WriteLine("kategori id = " + kategoriId.ToString());
-                    bool b = VeritabaniIslemleri.sorguCalistir("insert into filmler.filmler " +
+                    bool b = DatabaseTransactions.executeQuery("insert into filmler.filmler " +
                         "(kategori_id,film_ad,yonetmen_ad,konusu,film_afisi,yapim_yili)" +
                         "values('" + kategoriId + "','" + filmAd + "','" + yonetmenAd + "','" + konu + "','" + afisUrl + "','" + yapimYili + "')  ");
 
@@ -86,21 +86,21 @@ namespace MOVIEAPP.Controllers
             {
 
                 FilmList filmList = new FilmList();
-                filmList.films = new List<Film>();
+                filmList.movies = new List<Movie>();
                 DataTable dt = vt.veriGetir("SELECT film_id,film_ad,yonetmen_ad,konusu,yapim_yili,filmler.kategori_id FROM filmler.filmler " +
                 " INNER JOIN filmler.kategoriler" +
                 " ON filmler.kategori_id = kategoriler.kategori_id ");
 
                 foreach (DataRow row in dt.Rows)
                 {
-                    filmList.film = new Film();
-                    filmList.film.filmAd = row["film_Ad"].ToString();
-                    filmList.film.konusu = row["konusu"].ToString();
-                    filmList.film.yonetmenAd = row["yonetmen_ad"].ToString();
-                    filmList.film.yapimYili = (int)row["yapim_yili"];
-                    filmList.film.kategoriId = (int)row["kategori_id"];
-                    filmList.film.filmId = (int)row["film_id"];
-                    filmList.films.Add(filmList.film);
+                    filmList.movie = new Movie();
+                    filmList.movie.name = row["film_Ad"].ToString();
+                    filmList.movie.subject = row["konusu"].ToString();
+                    filmList.movie.directorName = row["yonetmen_ad"].ToString();
+                    filmList.movie.year = (int)row["yapim_yili"];
+                    filmList.movie.categoryId = (int)row["kategori_id"];
+                    filmList.movie.movieId = (int)row["film_id"];
+                    filmList.movies.Add(filmList.movie);
                 }
                 return View(filmList);
             }
@@ -114,7 +114,7 @@ namespace MOVIEAPP.Controllers
         {
             if (erisimKontrol() == true)
             {
-                VeritabaniIslemleri.sorguCalistir("delete from filmler where film_id='" + TablesFilmId + "' ");
+                DatabaseTransactions.executeQuery("delete from filmler where film_id='" + TablesFilmId + "' ");
                 return Tables();
             }
             return RedirectToAction("Login", "Home");
@@ -176,23 +176,23 @@ namespace MOVIEAPP.Controllers
             {
                 if (formsFilmId != 0)
                 {
-                    VeritabaniIslemleri vt = new VeritabaniIslemleri();
+                    DatabaseTransactions vt = new DatabaseTransactions();
                     CategoryList categoryList = new CategoryList();
                     categoryList.categories = new List<Category>();
-                    categoryList.film = new Film();
-                    List<Category> kategoriler = VeritabaniIslemleri.kategorileriGetir();
+                    categoryList.movie = new Movie();
+                    List<Category> kategoriler = DatabaseTransactions.kategorileriGetir();
 
                     DataTable dt = vt.veriGetir("select * from filmler.filmler where film_id='" + formsFilmId + "'  ");
 
                     foreach (DataRow row in dt.Rows)
                     {
-                        categoryList.film.yonetmenAd = row["yonetmen_ad"].ToString();
-                        categoryList.film.konusu = row["konusu"].ToString();
-                        categoryList.film.filmAd = row["film_ad"].ToString();
-                        categoryList.film.afisUrl = row["film_afisi"].ToString();
-                        categoryList.film.yapimYili = (int)row["yapim_yili"];
-                        categoryList.film.kategoriId = (int)row["kategori_id"];
-                        categoryList.film.filmId = (int)row["film_id"];
+                        categoryList.movie.directorName = row["yonetmen_ad"].ToString();
+                        categoryList.movie.subject = row["konusu"].ToString();
+                        categoryList.movie.name = row["film_ad"].ToString();
+                        categoryList.movie.posterUrl = row["film_afisi"].ToString();
+                        categoryList.movie.year = (int)row["yapim_yili"];
+                        categoryList.movie.categoryId = (int)row["kategori_id"];
+                        categoryList.movie.movieId = (int)row["film_id"];
                     }
 
                     categoryList.categories = kategoriler;
@@ -211,37 +211,37 @@ namespace MOVIEAPP.Controllers
         {
             if (erisimKontrol() == true)
             {
-                int filmId = categoryList.film.filmId = categoryList.film.filmId;
-                string filmAd = categoryList.film.filmAd;
-                string yonetmenAd = categoryList.film.yonetmenAd;
-                int yapimYili = categoryList.film.yapimYili;
-                string konusu = categoryList.film.konusu;
-                string afisUrl = categoryList.film.afisUrl;
-                int kategoriId = categoryList.film.kategoriId;
+                int filmId = categoryList.movie.movieId = categoryList.movie.movieId;
+                string filmAd = categoryList.movie.name;
+                string yonetmenAd = categoryList.movie.directorName;
+                int yapimYili = categoryList.movie.year;
+                string konusu = categoryList.movie.subject;
+                string afisUrl = categoryList.movie.posterUrl;
+                int kategoriId = categoryList.movie.categoryId;
 
                 if (filmAd != null && yonetmenAd != null && yapimYili != 0 && konusu != null && afisUrl != null & kategoriId != 0)
                 {
-                    bool b = VeritabaniIslemleri.sorguCalistir("update filmler.filmler set film_ad='" + filmAd + "'," +
+                    bool b = DatabaseTransactions.executeQuery("update filmler.filmler set film_ad='" + filmAd + "'," +
                         "yonetmen_ad='" + yonetmenAd + "',yapim_yili='" + yapimYili + "',konusu='" + konusu + "',film_afisi='" + afisUrl + "'," +
                         "kategori_id='" + kategoriId + "' where filmler.film_id='" + filmId + "' ");
                     if (b)
                     {
                         FilmList filmList = new FilmList();
-                        filmList.films = new List<Film>();
+                        filmList.movies = new List<Movie>();
                         DataTable dt = vt.veriGetir("SELECT film_id,film_ad,yonetmen_ad,konusu,yapim_yili,filmler.kategori_id FROM filmler.filmler " +
                         " INNER JOIN filmler.kategoriler" +
                         " ON filmler.kategori_id = kategoriler.kategori_id ");
 
                         foreach (DataRow row in dt.Rows)
                         {
-                            filmList.film = new Film();
-                            filmList.film.filmAd = row["film_Ad"].ToString();
-                            filmList.film.konusu = row["konusu"].ToString();
-                            filmList.film.yonetmenAd = row["yonetmen_ad"].ToString();
-                            filmList.film.yapimYili = (int)row["yapim_yili"];
-                            filmList.film.kategoriId = (int)row["kategori_id"];
-                            filmList.film.filmId = (int)row["film_id"];
-                            filmList.films.Add(filmList.film);
+                            filmList.movie = new Movie();
+                            filmList.movie.name = row["film_Ad"].ToString();
+                            filmList.movie.subject = row["konusu"].ToString();
+                            filmList.movie.directorName = row["yonetmen_ad"].ToString();
+                            filmList.movie.year = (int)row["yapim_yili"];
+                            filmList.movie.categoryId = (int)row["kategori_id"];
+                            filmList.movie.movieId = (int)row["film_id"];
+                            filmList.movies.Add(filmList.movie);
                         }
                         return View("Tables", filmList);
                     }

@@ -12,13 +12,13 @@ namespace MOVIEAPP.ViewComponents
     {
         public IViewComponentResult Invoke () {
 
-            List<Category> kategoriler = VeritabaniIslemleri.kategorileriGetir();
+            List<Category> categories = DatabaseTransactions.kategorileriGetir();
             //nula eşit değilse selectedcategoryye aktar
             //RouteData ile o anki actionu al  
             if (RouteData.Values["action"].ToString() == "Index") { 
                 ViewBag.SelectedCategory = RouteData?.Values["name"]; 
             }   
-            return View(kategoriler);
+            return View(categories);
                
         }
     }
